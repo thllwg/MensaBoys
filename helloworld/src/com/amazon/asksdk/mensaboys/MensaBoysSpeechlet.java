@@ -77,13 +77,20 @@ public class MensaBoysSpeechlet implements Speechlet {
         Intent intent = request.getIntent();
         String intentName = (intent != null) ? intent.getName() : null;
 
-        if ("GetSpeiseplanTag".equals(intentName)) {
-            return getSpeiseplanResponse(intent);
-        } else if ("AMAZON.HelpIntent".equals(intentName)) {
-            return getWelcomeResponse();
-        } else {
-            throw new SpeechletException("Invalid Intent");
+        try{
+            if ("GetSpeiseplanTag".equals(intentName)) {
+                return getSpeiseplanResponse(intent);
+            } else if ("AMAZON.HelpIntent".equals(intentName)) {
+                return getWelcomeResponse();
+            } else {
+                throw new SpeechletException("Invalid Intent");
+            }
+        } catch (Exception e){
+            PlainTextOutputSpeech exceptionSpeech = new PlainTextOutputSpeech();
+            exceptionSpeech.setText("Verfickte Scheiße, " + e.getMessage());
+            return SpeechletResponse.newTellResponse(exceptionSpeech);
         }
+
     }
 
     @Override
@@ -137,9 +144,6 @@ public class MensaBoysSpeechlet implements Speechlet {
 
         String speechText = mensa.getName() + " bietet am " + day.toString() + " folgendes Angebot: ";
 
-
-
-
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
         card.setTitle("Mensa Boys");
@@ -192,7 +196,7 @@ public class MensaBoysSpeechlet implements Speechlet {
             try {
                 mensa = Mensa.getMensaByName(mensaSlot.getValue());
             } catch (MensaNotFoundException e) {
-                throw new SpeechletException("Mensa nicht gefunden");
+                throw new SpeechletException("Mensa " + mensaSlot.getValue() + " nicht gefunden");
             }
         } else {
             try {
