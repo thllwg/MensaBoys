@@ -1,16 +1,24 @@
 /**
-    Copyright 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-    Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
-
-        http://aws.amazon.com/apache2.0/
-
-    or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ * Copyright 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
+ * <p>
+ * http://aws.amazon.com/apache2.0/
+ * <p>
+ * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
 package com.amazon.asksdk.mensaboys;
 
+import com.amazon.asksdk.mensaboys.*;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
 
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.slu.Slot;
@@ -25,6 +33,7 @@ import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
+
 
 /**
  * This sample shows how to create a simple speechlet for handling speechlet requests.
@@ -51,7 +60,7 @@ public class MensaBoysSpeechlet implements Speechlet {
         // any initialization logic goes here
     }
 
-    @Override 
+    @Override
     public SpeechletResponse onLaunch(final LaunchRequest request, final Session session)
             throws SpeechletException {
         log.info("onLaunch requestId={}, sessionId={}", request.getRequestId(),
@@ -71,7 +80,7 @@ public class MensaBoysSpeechlet implements Speechlet {
         if ("GetSpeiseplanTag".equals(intentName)) {
             return getSpeiseplanResponse(intent);
         } else if ("AMAZON.HelpIntent".equals(intentName)) {
-            return getHelpResponse();
+            return getWelcomeResponse();
         } else {
             throw new SpeechletException("Invalid Intent");
         }
@@ -121,12 +130,15 @@ public class MensaBoysSpeechlet implements Speechlet {
      *
      * @return SpeechletResponse spoken and visual response for the given intent
      */
-    private SpeechletResponse getSpeiseplanResponse(Intent intent) {
-        String speechText = "Heute gibt es Hack. Der Tag ist ";
-        String day = getSlotDay(intent);
-        String mensa = getSlotMensa(intent);
+    private SpeechletResponse getSpeiseplanResponse(Intent intent) throws SpeechletException {
 
-        speechText = speechText + " " + day;
+        Date day = getSlotDay(intent);
+        Mensa mensa = getSlotMensa(intent);
+
+        String speechText = mensa.getName() + " bietet am " + day.toString() + " folgendes Angebot: ";
+
+        
+
 
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
@@ -141,46 +153,54 @@ public class MensaBoysSpeechlet implements Speechlet {
     }
 
     /**
-     * Creates a {@code SpeechletResponse} for the help intent.
+     * Extracts the queried date from the Alexa intent
      *
-     * @return SpeechletResponse spoken and visual response for the given intent
+     * @param intent Alexa intent
+     * @return Date
      */
-    private SpeechletResponse getHelpResponse() {
-        String speechText = "You can say hello to me!";
-
-        // Create the Simple card content.
-        SimpleCard card = new SimpleCard();
-        card.setTitle("Mensa Boys");
-        card.setContent(speechText);
-
-        // Create the plain text output.
-        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
-        speech.setText(speechText);
-
-        // Create reprompt
-        Reprompt reprompt = new Reprompt();
-        reprompt.setOutputSpeech(speech);
-
-        return SpeechletResponse.newAskResponse(speech, reprompt, card);
-    }
-
-    private String getSlotDay(Intent intent) {
+    private Date getSlotDay(Intent intent) {
         Slot daySlot = intent.getSlot(SLOT_DAY);
+        Date date;
 
         if (daySlot != null && daySlot.getValue() != null) {
-            return daySlot.getValue();
-        } else{
-            return new String("Kein Tag");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-d");
+            try {
+                date = dateFormat.parse(daySlot.getValue());
+            } catch (ParseException e) {
+                date = new Date();
+            }
+        } else {
+            date = new Date();
         }
+        return date;
+
     }
 
-    private String getSlotMensa(Intent intent){
+    /**
+     * Extracts the queried Mensa from the Alexa intent
+     *
+     * @param intent Alexa intent
+     * @return Mensa
+     * @throws SpeechletException if the mensa was not found
+     */
+    private Mensa getSlotMensa(Intent intent) throws SpeechletException {
+
         Slot mensaSlot = intent.getSlot(SLOT_MENSA);
+        Mensa mensa;
 
         if (mensaSlot != null && mensaSlot.getValue() != null) {
-            return mensaSlot.getValue();
-        } else{
-            return new String("Keine Mensa");
+            try {
+                mensa = Mensa.getMensaByName(mensaSlot.getValue());
+            } catch (MensaNotFoundException e) {
+                throw new SpeechletException("Mensa nicht gefunden");
+            }
+        } else {
+            try {
+                mensa = Mensa.getMensaByName("Mensa Da Vinci"); //Default
+            } catch (MensaNotFoundException e) {
+                throw new SpeechletException("Default Mensa nicht gefunden");
+            }
         }
+        return mensa;
     }
 }

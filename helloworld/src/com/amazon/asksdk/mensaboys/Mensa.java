@@ -1,6 +1,8 @@
 package com.amazon.asksdk.mensaboys;
+import com.amazon.asksdk.mensaboys.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +14,7 @@ import java.util.ArrayList;
  * @author tacke
  */
 public class Mensa {
-    private int id;
+
     private String name;
     // private ArrayList<Gericht> gerichte;
     private Speiseplan speiseplan;
@@ -21,21 +23,25 @@ public class Mensa {
      * Constant defining the potential options for the intent slot mensa
      */
     private static final String[] LIST_OF_MENSEN = {
-            "Bistro Denkpause",
-            "Bistro Durchblick",
-            "Bistro Frieden",
-            "Bistro Hüfferstiftung",
-            "Bistro KaBu",
-            "Bistro Katholische Hochschule",
-            "Bistro Oeconomicum",
-            "Mensa Da Vinci",
-            "Mensa Steinfurt",
-            "Mensa am Aasee",
-            "Mensa am Ring"
+        "Bistro Denkpause",
+        "Bistro Durchblick",
+        "Bistro Frieden",
+        "Bistro Hüfferstiftung",
+        "Bistro KaBu",
+        "Bistro Katholische Hochschule",
+        "Bistro Oeconomicum",
+        "Mensa Da Vinci",
+        "Mensa Steinfurt",
+        "Mensa am Aasee",
+        "Mensa am Ring"
     };
 
     public Mensa() {
 
+    }
+
+    public Mensa(String name) {
+        this.name = name;
     }
 
     /* public ArrayList<Gericht> getGerichte(){
@@ -53,13 +59,6 @@ public class Mensa {
         this.speiseplan = speiseplan;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -71,5 +70,17 @@ public class Mensa {
 
     public static String[] getListOfMensen() {
         return LIST_OF_MENSEN;
+    }
+
+    public static Mensa getMensaByName(String name) throws MensaNotFoundException {
+
+        String[] mensen = getListOfMensen();
+
+        if(Arrays.asList(mensen).contains(name)){
+            return new Mensa(name);
+        }
+        else {
+            throw new MensaNotFoundException();
+        }
     }
 }
