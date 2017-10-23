@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.amazon.speech.slu.Intent;
+import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.IntentRequest;
 import com.amazon.speech.speechlet.LaunchRequest;
 import com.amazon.speech.speechlet.Session;
@@ -30,6 +31,34 @@ import com.amazon.speech.ui.SimpleCard;
  */
 public class MensaBoysSpeechlet implements Speechlet {
     private static final Logger log = LoggerFactory.getLogger(MensaBoysSpeechlet.class);
+
+    /**
+     * Constant defining session attribute key for the intent slot key for the date of menu.
+     */
+    private static final String SLOT_DAY = "tag";
+
+
+    /**
+     * Constant defining session attribute key for the intent slot key for the date of menu.
+     */
+    private static final String SLOT_MENSA = "mensa";
+
+    /**
+     * Constant defining the potential options for the intent slot mensa
+     */
+    private static final String[] LIST_OF_MENSEN = {
+            "Bistro Denkpause",
+            "Bistro Durchblick",
+            "Bistro Frieden",
+            "Bistro Hüfferstiftung",
+            "Bistro KaBu",
+            "Bistro Katholische Hochschule",
+            "Bistro Oeconomicum",
+            "Mensa Da Vinci",
+            "Mensa Steinfurt",
+            "Mensa am Aasee",
+            "Mensa am Ring"
+    };
 
     @Override
     public void onSessionStarted(final SessionStartedRequest request, final Session session)
@@ -56,8 +85,8 @@ public class MensaBoysSpeechlet implements Speechlet {
         Intent intent = request.getIntent();
         String intentName = (intent != null) ? intent.getName() : null;
 
-        if ("HelloWorldIntent".equals(intentName)) {
-            return getHelloResponse();
+        if ("GetSpeiseplanTag".equals(intentName)) {
+            return getSpeiseplanResponse(intent, session);
         } else if ("AMAZON.HelpIntent".equals(intentName)) {
             return getHelpResponse();
         } else {
@@ -98,16 +127,19 @@ public class MensaBoysSpeechlet implements Speechlet {
     }
 
     /**
-     * Creates a {@code SpeechletResponse} for the hello intent.
+     * Creates a {@code SpeechletResponse} for the Speiseplan Tag intent.
      *
      * @return SpeechletResponse spoken and visual response for the given intent
      */
-    private SpeechletResponse getHelloResponse() {
-        String speechText = "Hello world";
+    private SpeechletResponse getSpeiseplanResponse(Intent intent, Session session) {
+        String speechText = "Heute gibt es Hack. Der Tag ist ";
+        String day = getSlotDay(intent);
+
+        speechText = speechText + " " + day;
 
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
+        card.setTitle("GetSpeiseplanTag");
         card.setContent(speechText);
 
         // Create the plain text output.
@@ -139,5 +171,15 @@ public class MensaBoysSpeechlet implements Speechlet {
         reprompt.setOutputSpeech(speech);
 
         return SpeechletResponse.newAskResponse(speech, reprompt, card);
+    }
+
+    private String getSlotDay(Intent intent) {
+        Slot daySlot = intent.getSlot(SLOT_DAY);
+
+        if (daySlot != null && daySlot.getValue() != null) {
+            return daySlot.getValue();
+        } else{
+            return new String("Kein Tag");
+        }
     }
 }
