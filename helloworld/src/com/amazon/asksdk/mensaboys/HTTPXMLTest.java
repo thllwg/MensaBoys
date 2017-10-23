@@ -117,7 +117,7 @@ public class HTTPXMLTest
 
 	    		   plan.getGerichte().add(gericht);
 	    	   }
-	    	   mensa.getSpeiseplan().add(plan);
+	    	   //mensa.getSpeiseplan().add(plan);
 	       }
 	      return mensa;
 	}
