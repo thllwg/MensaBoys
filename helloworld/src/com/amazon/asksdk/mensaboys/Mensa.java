@@ -1,6 +1,7 @@
 package com.amazon.asksdk.mensaboys;
 
 import com.amazon.asksdk.mensaboys.MensaNotFoundException;
+import com.amazon.asksdk.mensaboys.Utils;
 import java.util.Arrays;
 import java.util.ArrayList;
 
@@ -26,15 +27,17 @@ public class Mensa {
             "Bistro Denkpause",
             "Bistro Durchblick",
             "Bistro Frieden",
-            "Bistro Hüfferstiftung",
+            "Bistro Hüfferstift",
             "Bistro KaBu",
-            "Bistro Katholische Hochschule",
+            "Bistro KatHo", // Katholische Hochschule
             "Bistro Oeconomicum",
-            "Mensa Da Vinci",
+            "Mensa da Vinci",
             "Mensa Steinfurt",
             "Mensa am Aasee",
             "Mensa am Ring"
     };
+
+    private static final int THRESHOLD = 4;
 
     public Mensa() {
 
@@ -51,13 +54,13 @@ public class Mensa {
          this.gerichte=gerichte;
      }
      */
-    public Speiseplan getSpeiseplan() {
-        return speiseplan;
-    }
-
-    public void setSpeiseplan(Speiseplan speiseplan) {
-        this.speiseplan = speiseplan;
-    }
+//    public Speiseplan getSpeiseplan() {
+//        return speiseplan;
+//    }
+//
+//    public void setSpeiseplan(Speiseplan speiseplan) {
+//        this.speiseplan = speiseplan;
+//    }
 
     public String getName() {
         return name;
@@ -75,8 +78,31 @@ public class Mensa {
 
         String[] mensen = getListOfMensen();
 
-        if (Arrays.asList(mensen).contains(name)) {
-            return new Mensa(name);
+        // Iteriere durch alle Mensen
+        // Bilde bei jedem die Levensthein Distanz
+        // Behalte Mensa, falls Distanz die bisher kleinste ist
+        // gebe Mensa zurück, wenn Distanz <= theshold
+        // sonst gebe MensaNotFoundException zurück
+
+        String candidate = "";
+        int distance = 999;
+        int temp_distance = 0;
+
+        for(String mensa:Arrays.asList(mensen)){
+
+            String tempnam = name.toLowerCase().replaceAll("Mensa", "").trim();
+            String tempmensa = mensa.toLowerCase().replaceAll("Mensa", "").trim();
+
+            temp_distance = Utils.levenshteinDistance(tempnam, tempmensa);
+
+            if(temp_distance < distance){
+                candidate = mensa;
+                distance = temp_distance;
+            }
+        }
+
+        if (distance <= THRESHOLD) {
+            return new Mensa(candidate);
         } else {
             throw new MensaNotFoundException();
         }
