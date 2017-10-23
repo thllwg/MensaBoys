@@ -6,6 +6,9 @@
 
 package com.amazon.asksdk.mensaboys;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author tacke
@@ -57,15 +60,16 @@ public class Gericht {
     }
 
     public String tostring(String name){
-
-        while((name.indexOf("(")!=-1) && name.indexOf(")")!=-1){
-            int startzeichen = name.indexOf("(");
-            int endzeichen = name.indexOf(")");
-            int length = name.length();
-            name = name.substring(0, startzeichen)+name.substring(endzeichen, length);
-        }
-
-        return name;
+    	
+    	 String s = name;
+         String re = "\\([^()]*\\)";
+         Pattern p = Pattern.compile(re);
+         Matcher m = p.matcher(s);
+         while (m.find()) {
+             s = m.replaceAll("");
+             m = p.matcher(s);
+         }
+      return s;
 
     }
 }
