@@ -19,6 +19,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.slu.Slot;
@@ -166,8 +167,28 @@ public class MensaBoysSpeechlet implements Speechlet {
 
         Date day = getSlotDay(intent);
         Mensa mensa = getSlotMensa(intent);
-
         String speechText = mensa.getName() + " bietet " + Utils.getDayAptonym(day) + " folgendes Angebot: ";
+
+        HTTPXMLTest xmlparser = new HTTPXMLTest();
+        List<Mensa> mensen = xmlparser.getAllMensen();
+
+        for(Mensa mensar:mensen){
+            if(mensa.getName().equalsIgnoreCase(mensar.getName())){
+                mensa = mensar;
+            }
+        }
+
+        try{
+            Speiseplan speiseplan = mensa.getSpeiseplan(day);
+            StringBuilder sb = new StringBuilder();
+            for(Gericht gericht:speiseplan.getGerichte()){
+                sb.append(gericht.getName()+", ");
+            }
+            speechText = speechText + sb.toString();
+
+        } catch (SpeiseplanException e){
+            throw new SpeechletException("Kein Speiseplan für " + Utils.getDayAptonym(day) + " gefunden.");
+        }
 
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
