@@ -1,5 +1,13 @@
-GetSpeiseplanTag Was gibt es {tag} in der Mensa {mensa} zu essen
-GetSpeiseplanTag Was gibt es {tag} zum Mittag in der {mensa} Mensa
-GetSpeiseplanTag Was gibt es {tag} in der {mensa} Mensa
-GetSpeiseplanTag Was gibt es in der {mensa} Mensa {tag} zu essen
-GetSpeiseplanTag Was hast du {tag} gekocht
+GetSpeiseplanTag Was gibt es {tag} in der {mensa} zu essen
+GetSpeiseplanTag Was gibt es {tag} im {mensa} zu essen
+GetSpeiseplanTag Was gibt es {tag} zum Mittag in der {mensa}
+GetSpeiseplanTag Was gibt es {tag} zum Mittag im {mensa}
+GetSpeiseplanTag Was gibt es {tag} in der {mensa}
+GetSpeiseplanTag Was gibt es {tag} im {mensa}
+GetSpeiseplanTag Was gibt es in der {mensa} {tag} zu essen
+GetSpeiseplanTag Was gibt es im {mensa} {tag} zu essen
+GetSpeiseplanTag Was gibt {tag} in der Mensa
+GetSpeiseplanTag Was wirst du {tag} kochen
+GetSpeiseplanTag Was hast du gekocht
+GetSpeiseplanTag Was gibt es zu essen
+GetSpeiseplanTag Was esse ich heute
