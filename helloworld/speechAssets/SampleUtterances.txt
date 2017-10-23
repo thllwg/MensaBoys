@@ -1,7 +1,5 @@
-HelloWorldIntent say hello
-HelloWorldIntent say hello world
-HelloWorldIntent hello
-HelloWorldIntent say hi
-HelloWorldIntent say hi world
-HelloWorldIntent hi
-HelloWorldIntent how are you
+GetSpeiseplanTag Was gibt es {tag} in der Mensa {mensa} zu essen
+GetSpeiseplanTag Was gibt es {tag} zum Mittag in der {mensa} Mensa
+GetSpeiseplanTag Was gibt es {tag} in der {mensa} Mensa
+GetSpeiseplanTag Was gibt es in der {mensa} Mensa {tag} zu essen
+GetSpeiseplanTag Was hast du {tag} gekocht

@@ -1,10 +1,26 @@
 {
   "intents": [
     {
-      "intent": "HelloWorldIntent"
+      "slots": [
+        {
+          "name": "tag",
+          "type": "AMAZON.DATE"
+        },
+        {
+          "name": "mensa",
+          "type": "LIST_OF_MENSEN"
+        }
+      ],
+      "intent": "GetSpeiseplanTag"
     },
     {
       "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
     }
   ]
 }
