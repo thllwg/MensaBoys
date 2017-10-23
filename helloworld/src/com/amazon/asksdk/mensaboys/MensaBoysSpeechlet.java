@@ -81,7 +81,7 @@ public class MensaBoysSpeechlet implements Speechlet {
             if ("GetSpeiseplanTag".equals(intentName)) {
                 return getSpeiseplanResponse(intent);
             } else if ("AMAZON.HelpIntent".equals(intentName)) {
-                return getWelcomeResponse();
+                return getHelpResponse();
             } else {
                 throw new SpeechletException("Invalid Intent");
             }
@@ -108,7 +108,7 @@ public class MensaBoysSpeechlet implements Speechlet {
      */
     private SpeechletResponse getWelcomeResponse() {
 
-        String speechText = "Tach Chef! Du kannst mich fragen, was es in der Mensa gibt!";
+        String speechText = "Mahlzeit! Du kannst die Mensa Boys fragen, was es zu Essen gibt!";
         PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
         speech.setText(speechText);
 
@@ -121,8 +121,8 @@ public class MensaBoysSpeechlet implements Speechlet {
 
         // Create reprompt
         String repromptText =
-                "Du kannst mich fragen, was es an einem beliebigen Tag in einer der Mensen in Münster zu essen gibt. "
-                        + " Zum Beispiel kannst Du fragen: Was gibt es heute in der Da Vinci Mensa?";
+                "Du kannst die Mensa Boys fragen, was es an einem beliebigen Tag in einer der Mensen in Münster "
+                        + " zu essen gibt. Zum Beispiel kannst Du fragen: Was gibt es heute in der Mensa Da Vinci?";
 
         Reprompt reprompt = new Reprompt();
         PlainTextOutputSpeech repromptSpeech = new PlainTextOutputSpeech();
@@ -130,6 +130,31 @@ public class MensaBoysSpeechlet implements Speechlet {
         reprompt.setOutputSpeech(repromptSpeech);
 
         return SpeechletResponse.newAskResponse(speech, reprompt, card);
+    }
+
+    /**
+     * Creates and returns a {@code SpeechletResponse} with a help message.
+     *
+     * @return SpeechletResponse spoken and visual response for the given intent
+     */
+    private SpeechletResponse getHelpResponse() {
+
+        // Create reprompt
+        String helpText =
+                "Du kannst die Mensa Boys fragen, was es an einem beliebigen Tag in einer der Mensen in Münster "
+                        + " zu essen gibt. Zum Beispiel kannst Du fragen: Was gibt es heute in der Mensa Da Vinci?";
+        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
+        speech.setText(helpText);
+
+        // If the user either does not reply to the welcome message or says something that is not
+        // understood, they will be prompted again with this text.
+        // Create the Simple card content.
+        SimpleCard card = new SimpleCard();
+        card.setTitle("Mensa Boys");
+        card.setContent(helpText);
+
+
+        return SpeechletResponse.newTellResponse(speech, card);
     }
 
     /**
