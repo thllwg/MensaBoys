@@ -1,9 +1,11 @@
 package com.amazon.asksdk.mensaboys;
 
 import com.amazon.asksdk.mensaboys.MensaNotFoundException;
+import com.amazon.asksdk.mensaboys.SpeiseplanException;
 import com.amazon.asksdk.mensaboys.Utils;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /*
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 public class Mensa {
 
     private String name;
-    private ArrayList<Speiseplan> speiseplan=new ArrayList<Speiseplan>();
+    private ArrayList<Speiseplan> speiseplan = new ArrayList<Speiseplan>();
 
     /**
      * Constant defining the potential options for the intent slot mensa
@@ -54,13 +56,19 @@ public class Mensa {
          this.gerichte=gerichte;
      }
      */
-//    public Speiseplan getSpeiseplan() {
-//        return speiseplan;
-//    }
-//
-//    public void setSpeiseplan(Speiseplan speiseplan) {
-//        this.speiseplan = speiseplan;
-//    }
+
+    public Speiseplan getSpeiseplan(Date datum) throws SpeiseplanException {
+        for(Speiseplan s:speiseplan){
+            if(s.getDatum().equals(datum)){
+                return s;
+            }
+        } 
+        throw new SpeiseplanException("Mensa ist geschlossen!");
+    }
+
+    public void setSpeiseplan(Speiseplan speiseplan) {
+        this.speiseplan.add(speiseplan);
+    }
 
     public String getName() {
         return name;

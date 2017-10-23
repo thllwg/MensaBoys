@@ -4,3 +4,4 @@ helloworld/.gradle
 helloworld/target
 .gradle
 helloworld/build
+helloworld/out
