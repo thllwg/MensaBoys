@@ -3,6 +3,7 @@ package com.amazon.asksdk.mensaboys;
 import com.amazon.asksdk.mensaboys.MensaNotFoundException;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /*
@@ -51,8 +52,15 @@ public class Mensa {
          this.gerichte=gerichte;
      }
      */
-    public Speiseplan getSpeiseplan() {
-        return speiseplan;
+    public Speiseplan getSpeiseplan(Date datum) throws SpeiseplanException {
+        for(Speiseplan s:speiseplan){
+            if(s.getDatum().equals(datum)){
+                return s;
+            }
+        } 
+        throw new SpeiseplanException("Mensa ist geschlossen!");
+        
+        
     }
 
     public void setSpeiseplan(Speiseplan speiseplan) {

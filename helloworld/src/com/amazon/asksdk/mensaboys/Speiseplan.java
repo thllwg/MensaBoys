@@ -1,6 +1,7 @@
 package com.amazon.asksdk.mensaboys;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -10,9 +11,9 @@ public class Speiseplan {
 	
 	private String name;
 	
-	private Calendar datum;
+	private Date datum;
 	
-	private ArrayList<Gericht> gerichte=new ArrayList<Gericht>();
+	private ArrayList<Gericht> gerichte;
 	
 	public Speiseplan(){}
 	
@@ -36,8 +37,8 @@ public class Speiseplan {
 		return datum;
 	}
 	
-	public void setDatum(int jahr, int monat, int tag){
-		this.datum = new GregorianCalendar(jahr, monat, tag);
+	public void setDatum(Date datum){
+		this.datum = datum;
 	}
 	
 	public ArrayList<Gericht> getGerichte(){
