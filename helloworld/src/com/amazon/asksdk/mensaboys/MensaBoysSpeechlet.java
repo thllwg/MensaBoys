@@ -117,6 +117,7 @@ public class MensaBoysSpeechlet implements Speechlet {
     private SpeechletResponse getSpeiseplanResponse(Intent intent) {
         String speechText = "Heute gibt es Hack. Der Tag ist ";
         String day = getSlotDay(intent);
+        String mensa = getSlotMensa(intent);
 
         speechText = speechText + " " + day;
 
@@ -163,6 +164,16 @@ public class MensaBoysSpeechlet implements Speechlet {
             return daySlot.getValue();
         } else{
             return new String("Kein Tag");
+        }
+    }
+
+    private String getSlotMensa(Intent intent){
+        Slot mensaSlot = intent.getSlot(SLOT_MENSA);
+
+        if (mensaSlot != null && mensaSlot.getValue() != null) {
+            return mensaSlot.getValue();
+        } else{
+            return new String("Keine Mensa");
         }
     }
 }
