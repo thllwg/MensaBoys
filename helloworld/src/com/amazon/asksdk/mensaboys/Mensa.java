@@ -2,6 +2,7 @@ package com.amazon.asksdk.mensaboys;
 
 import com.amazon.asksdk.mensaboys.MensaNotFoundException;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 
 /*
@@ -16,7 +17,7 @@ import java.util.Arrays;
 public class Mensa {
 
     private String name;
-    private Speiseplan speiseplan;
+    private ArrayList<Speiseplan> speiseplan=new ArrayList<Speiseplan>();
 
     /**
      * Constant defining the potential options for the intent slot mensa

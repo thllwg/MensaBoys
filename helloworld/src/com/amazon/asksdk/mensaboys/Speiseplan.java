@@ -12,7 +12,7 @@ public class Speiseplan {
 	
 	private Calendar datum;
 	
-	private ArrayList<Gericht> gerichte;
+	private ArrayList<Gericht> gerichte=new ArrayList<Gericht>();
 	
 	public Speiseplan(){}
 	
