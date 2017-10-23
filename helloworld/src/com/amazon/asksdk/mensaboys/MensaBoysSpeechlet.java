@@ -167,7 +167,7 @@ public class MensaBoysSpeechlet implements Speechlet {
         Date day = getSlotDay(intent);
         Mensa mensa = getSlotMensa(intent);
 
-        String speechText = mensa.getName() + " bietet am " + Utils.getDayAptonym(day) + " folgendes Angebot: ";
+        String speechText = mensa.getName() + " bietet " + Utils.getDayAptonym(day) + " folgendes Angebot: ";
 
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
