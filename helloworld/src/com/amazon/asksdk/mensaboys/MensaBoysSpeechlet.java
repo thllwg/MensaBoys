@@ -91,20 +91,27 @@ public class MensaBoysSpeechlet implements Speechlet {
      * @return SpeechletResponse spoken and visual response for the given intent
      */
     private SpeechletResponse getWelcomeResponse() {
-        String speechText = "Welcome to the Alexa Skills Kit, you can say hello";
 
-        // Create the Simple card content.
-        SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
-        card.setContent(speechText);
-
-        // Create the plain text output.
+        String speechText = "Tach Chef! Du kannst mich fragen, was es in der Mensa gibt!";
         PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
         speech.setText(speechText);
 
+        // If the user either does not reply to the welcome message or says something that is not
+        // understood, they will be prompted again with this text.
+        // Create the Simple card content.
+        SimpleCard card = new SimpleCard();
+        card.setTitle("Mensa Boys");
+        card.setContent(speechText);
+
         // Create reprompt
+        String repromptText =
+                "Du kannst mich fragen, was es an einem beliebigen Tag in einer der Mensen in Münster zu essen gibt. "
+                        + " Zum Beispiel kannst Du fragen: Was gibt es heute in der Da Vinci Mensa?";
+
         Reprompt reprompt = new Reprompt();
-        reprompt.setOutputSpeech(speech);
+        PlainTextOutputSpeech repromptSpeech = new PlainTextOutputSpeech();
+        repromptSpeech.setText(repromptText);
+        reprompt.setOutputSpeech(repromptSpeech);
 
         return SpeechletResponse.newAskResponse(speech, reprompt, card);
     }
@@ -122,7 +129,7 @@ public class MensaBoysSpeechlet implements Speechlet {
 
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
-        card.setTitle("GetSpeiseplanTag");
+        card.setTitle("Mensa Boys");
         card.setContent(speechText);
 
         // Create the plain text output.
@@ -142,7 +149,7 @@ public class MensaBoysSpeechlet implements Speechlet {
 
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
+        card.setTitle("Mensa Boys");
         card.setContent(speechText);
 
         // Create the plain text output.
