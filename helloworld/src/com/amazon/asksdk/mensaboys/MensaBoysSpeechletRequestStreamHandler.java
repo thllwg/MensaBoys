@@ -17,11 +17,11 @@ import com.amazon.speech.speechlet.lambda.SpeechletRequestStreamHandler;
 /**
  * This class could be the handler for an AWS Lambda function powering an Alexa Skills Kit
  * experience. To do this, simply set the handler field in the AWS Lambda console to
- * "com.amazon.asksdk.mensaboys.HelloWorldSpeechletRequestStreamHandler" For this to work, you'll also need to build
+ * "com.amazon.asksdk.mensaboys.MensaBoysSpeechletRequestStreamHandler" For this to work, you'll also need to build
  * this project using the {@code lambda-compile} Ant task and upload the resulting zip file to power
  * your function.
  */
-public final class HelloWorldSpeechletRequestStreamHandler extends SpeechletRequestStreamHandler {
+public final class MensaBoysSpeechletRequestStreamHandler extends SpeechletRequestStreamHandler {
     private static final Set<String> supportedApplicationIds;
     static {
         /*
@@ -32,7 +32,7 @@ public final class HelloWorldSpeechletRequestStreamHandler extends SpeechletRequ
         // supportedApplicationIds.add("[unique-value-here]");
     }
 
-    public HelloWorldSpeechletRequestStreamHandler() {
-        super(new HelloWorldSpeechlet(), supportedApplicationIds);
+    public MensaBoysSpeechletRequestStreamHandler() {
+        super(new MensaBoysSpeechlet(), supportedApplicationIds);
     }
 }

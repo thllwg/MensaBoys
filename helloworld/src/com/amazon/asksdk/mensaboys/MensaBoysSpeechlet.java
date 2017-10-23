@@ -28,8 +28,8 @@ import com.amazon.speech.ui.SimpleCard;
 /**
  * This sample shows how to create a simple speechlet for handling speechlet requests.
  */
-public class HelloWorldSpeechlet implements Speechlet {
-    private static final Logger log = LoggerFactory.getLogger(HelloWorldSpeechlet.class);
+public class MensaBoysSpeechlet implements Speechlet {
+    private static final Logger log = LoggerFactory.getLogger(MensaBoysSpeechlet.class);
 
     @Override
     public void onSessionStarted(final SessionStartedRequest request, final Session session)
@@ -39,7 +39,7 @@ public class HelloWorldSpeechlet implements Speechlet {
         // any initialization logic goes here
     }
 
-    @Override
+    @Override 
     public SpeechletResponse onLaunch(final LaunchRequest request, final Session session)
             throws SpeechletException {
         log.info("onLaunch requestId={}, sessionId={}", request.getRequestId(),
