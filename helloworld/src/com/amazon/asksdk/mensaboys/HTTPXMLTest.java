@@ -34,11 +34,11 @@ public class HTTPXMLTest
 		
 	}
 	
-//	public static void main(String[] args) 
+//	public static void main(String[] args)
 //    {
 //     HTTPXMLTest mp = new HTTPXMLTest();
 //     List<Mensa>mensen = mp.getAllMensen();
-//     
+//
 //    }
 	
 	public List<Mensa> getAllMensen(){

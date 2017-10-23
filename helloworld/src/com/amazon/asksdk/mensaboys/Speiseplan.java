@@ -13,7 +13,7 @@ public class Speiseplan {
 	
 	private Date datum;
 	
-	private ArrayList<Gericht> gerichte;
+	private ArrayList<Gericht> gerichte = new ArrayList<Gericht>();
 	
 	public Speiseplan(){}
 	
