@@ -16,17 +16,14 @@ public class Gericht {
     private float price1,price2,price3;
     private String foodicon;
     private String kategorie; 
-    public Gericht(){
-    }
+    public Gericht(){}
     public String getId(){
         return id;
     }
     public void setId(String id){
         this.id=id;
     }
-    public String getName(){
-        return name;
-    }
+    public String getName(){ return tostring(name); }
     public void setName(String name){
         this.name=name;
     }
@@ -36,15 +33,13 @@ public class Gericht {
     public void setPrice1(float price1){
         this.price1=price1;
     }
-     public float getPrice2(){
+    public float getPrice2(){
         return price2;
     }
     public void setPrice2(float price2){
         this.price2=price2;
     }
-     public float getPrice3(){
-        return price3;
-    }
+    public float getPrice3(){ return price3; }
     public void setPrice3(float price3){
         this.price3=price3;
     }
@@ -59,5 +54,18 @@ public class Gericht {
     }
     public void setKategorie(String kategorie){
         this.kategorie=kategorie;
+    }
+
+    public string tostring(String name){
+
+        while(name.indexOf("(")!=NULL && name.indexOf(")")){
+            int startzeichen = name.indexOf("(");
+            int endzeichen = name.indexOf(")");
+            int length = name.length();
+            name = name.substring(0, start)+name.substring(endzeichen, length);
+        }
+
+        return name;
+
     }
 }
