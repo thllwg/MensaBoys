@@ -188,7 +188,8 @@ public class MensaBoysSpeechlet implements Speechlet {
             Speiseplan speiseplan = mensa.getSpeiseplan(day);
             StringBuilder sb = new StringBuilder();
             for(Gericht gericht:speiseplan.getGerichte()){
-                sb.append(gericht.getName()+", ");
+                sb.append(gericht.getName() + "für " + gericht.getPrice1() + " Euro , ");
+                // sb.append(gericht.getName()+", ");
             }
             speechText = speechText + sb.toString();
 
@@ -227,7 +228,7 @@ public class MensaBoysSpeechlet implements Speechlet {
 //            Speiseplan speiseplan = mensa.getSpeiseplan(day);
 //            StringBuilder sb = new StringBuilder();
 //            for(Gericht gericht:speiseplan.getGerichte()){
-//                sb.append(gericht.getName()+", ");
+//                sb.append(gericht.getName() + "für " + gericht.getPrice1() + " Euro , ");
 //            }
 //            speechText = speechText + sb.toString();
 //
