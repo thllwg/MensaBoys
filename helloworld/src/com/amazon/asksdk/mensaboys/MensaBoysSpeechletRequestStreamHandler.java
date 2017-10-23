@@ -29,7 +29,7 @@ public final class MensaBoysSpeechletRequestStreamHandler extends SpeechletReque
          * Alexa Skill and put the relevant Application Ids in this Set.
          */
         supportedApplicationIds = new HashSet<String>();
-        supportedApplicationIds.add("[amzn1.ask.skill.28542311-927b-4e53-9534-5dafceb6df08]");
+        supportedApplicationIds.add("amzn1.ask.skill.28542311-927b-4e53-9534-5dafceb6df08");
     }
 
     public MensaBoysSpeechletRequestStreamHandler() {

@@ -86,7 +86,7 @@ public class MensaBoysSpeechlet implements Speechlet {
         String intentName = (intent != null) ? intent.getName() : null;
 
         if ("GetSpeiseplanTag".equals(intentName)) {
-            return getSpeiseplanResponse(intent, session);
+            return getSpeiseplanResponse(intent);
         } else if ("AMAZON.HelpIntent".equals(intentName)) {
             return getHelpResponse();
         } else {
@@ -131,7 +131,7 @@ public class MensaBoysSpeechlet implements Speechlet {
      *
      * @return SpeechletResponse spoken and visual response for the given intent
      */
-    private SpeechletResponse getSpeiseplanResponse(Intent intent, Session session) {
+    private SpeechletResponse getSpeiseplanResponse(Intent intent) {
         String speechText = "Heute gibt es Hack. Der Tag ist ";
         String day = getSlotDay(intent);
 
