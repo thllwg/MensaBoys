@@ -1,5 +1,10 @@
 package com.amazon.asksdk.mensaboys;
 
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.text.SimpleDateFormat;
+
 public class Utils {
 
     /**
@@ -71,4 +76,29 @@ public class Utils {
         return costsPrev[sLen];
     }
 
+    /**
+     * Returns the german Aptonym for the given day
+     *
+     * @param day the requested date
+     * @return String aptonym
+     */
+    public static String getDayAptonym (Date day) {
+
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat outputfmt = new SimpleDateFormat("yyyy-MM-dd");
+
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plus(1, ChronoUnit.DAYS);
+        LocalDate tomorrowtomorrow = today.plus(2, ChronoUnit.DAYS);
+
+        if (fmt.format(day).equals(fmt.format(today))){
+            return "Heute";
+        } else if(fmt.format(day).equals(fmt.format(tomorrow))){
+            return "Morgen";
+        } else if(fmt.format(day).equals(fmt.format(tomorrowtomorrow))){
+            return "Übermorgen";
+        } else {
+            return outputfmt.format(day);
+        }
+    }
 }
