@@ -1,2 +1,4 @@
 helloworld/.idea
 helloworld.iml
+helloworld/.gradle
+helloworld/target
