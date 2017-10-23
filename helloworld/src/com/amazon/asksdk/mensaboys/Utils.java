@@ -100,7 +100,7 @@ public class Utils {
         } else if(fmt.format(day).equals(formatter.format(tomorrowtomorrow))){
             return "Übermorgen";
         } else {
-            return "am " + outputfmt.format(day);
+            return "den " + outputfmt.format(day);
         }
     }
 }

@@ -26,7 +26,7 @@ public class Gericht {
     public void setId(String id){
         this.id=id;
     }
-    public String getName(){ return name; }
+    public String getName(){ return this.tostring(name); }
     public void setName(String name){
         this.name=name;
     }

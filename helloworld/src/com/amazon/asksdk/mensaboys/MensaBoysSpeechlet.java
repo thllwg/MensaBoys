@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.slu.Slot;
@@ -74,6 +75,9 @@ public class MensaBoysSpeechlet implements Speechlet {
     @Override
     public SpeechletResponse onIntent(final IntentRequest request, final Session session)
             throws SpeechletException {
+
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/Berlin"));
+
         log.info("onIntent requestId={}, sessionId={}", request.getRequestId(),
                 session.getSessionId());
 
@@ -90,7 +94,7 @@ public class MensaBoysSpeechlet implements Speechlet {
             }
         } catch (Exception e){
             PlainTextOutputSpeech exceptionSpeech = new PlainTextOutputSpeech();
-            exceptionSpeech.setText("Verfickte Scheiße, " + e.getMessage());
+            exceptionSpeech.setText("Eine Schande, " + e.getMessage());
             return SpeechletResponse.newTellResponse(exceptionSpeech);
         }
 
@@ -231,6 +235,11 @@ public class MensaBoysSpeechlet implements Speechlet {
 //            throw new SpeechletException("Kein Speiseplan für " + Utils.getDayAptonym(day) + " gefunden.");
 //        }
 //
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-d");
+//        Date datex = dateFormat.parse("2017-10-23"); // 2017-10-23
+//
+//        System.out.println(datex);
+//
 //        System.out.println(speechText);
 //
 //    }
@@ -248,7 +257,7 @@ public class MensaBoysSpeechlet implements Speechlet {
         if (daySlot != null && daySlot.getValue() != null) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-d");
             try {
-                date = dateFormat.parse(daySlot.getValue());
+                date = dateFormat.parse(daySlot.getValue()); // 2017-10-23
 
                 Calendar todate = new GregorianCalendar();
                 Calendar slotday = new GregorianCalendar();

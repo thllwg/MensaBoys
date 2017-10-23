@@ -5,7 +5,9 @@ GetSpeiseplanTag Was gibt es {tag} zum Mittag im {mensa}
 GetSpeiseplanTag Was gibt es {tag} in der {mensa}
 GetSpeiseplanTag Was gibt es {tag} im {mensa}
 GetSpeiseplanTag Was gibt es in der {mensa} {tag} zu essen
+GetSpeiseplanTag Was gibt es in der {mensa} zu essen
 GetSpeiseplanTag Was gibt es im {mensa} {tag} zu essen
+GetSpeiseplanTag Was gibt es im {mensa} zu essen
 GetSpeiseplanTag Was gibt {tag} in der Mensa
 GetSpeiseplanTag Was wirst du {tag} kochen
 GetSpeiseplanTag Was werdet ihr {tag} kochen
