@@ -20,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import com.amazon.speech.slu.Intent;
 import com.amazon.speech.slu.Slot;
@@ -202,37 +204,36 @@ public class MensaBoysSpeechlet implements Speechlet {
         return SpeechletResponse.newTellResponse(speech, card);
     }
 
-    public static void main(String[] args) throws Exception
-    {
-        Date day = new Date();
-        Mensa mensa = Mensa.getMensaByName("Mensa da Vinci");
-        String speechText = mensa.getName() + " bietet " + Utils.getDayAptonym(day) + " folgendes Angebot: ";
-
-        HTTPXMLTest xmlparser = new HTTPXMLTest();
-        List<Mensa> mensen = xmlparser.getAllMensen();
-
-        for(Mensa mensar:mensen){
-            if(mensa.getName().equalsIgnoreCase(mensar.getName())){
-                mensa = mensar;
-            }
-        }
-
-        try{
-            Speiseplan speiseplan = mensa.getSpeiseplan(day);
-            StringBuilder sb = new StringBuilder();
-            for(Gericht gericht:speiseplan.getGerichte()){
-                sb.append(gericht.getName()+", ");
-            }
-            speechText = speechText + sb.toString();
-
-        } catch (Exception e){
-            e.printStackTrace();
-            //throw new SpeechletException("Kein Speiseplan für " + Utils.getDayAptonym(day) + " gefunden.");
-        }
-
-        System.out.println(speechText);
-
-    }
+//    public static void main(String[] args) throws Exception
+//    {
+//        Date day = new Date();
+//        Mensa mensa = Mensa.getMensaByName("Mensa da Vinci");
+//        String speechText = mensa.getName() + " bietet " + Utils.getDayAptonym(day) + " folgendes Angebot: ";
+//
+//        HTTPXMLTest xmlparser = new HTTPXMLTest();
+//        List<Mensa> mensen = xmlparser.getAllMensen();
+//
+//        for(Mensa mensar:mensen){
+//            if(mensa.getName().equalsIgnoreCase(mensar.getName())){
+//                mensa = mensar;
+//            }
+//        }
+//
+//        try{
+//            Speiseplan speiseplan = mensa.getSpeiseplan(day);
+//            StringBuilder sb = new StringBuilder();
+//            for(Gericht gericht:speiseplan.getGerichte()){
+//                sb.append(gericht.getName()+", ");
+//            }
+//            speechText = speechText + sb.toString();
+//
+//        } catch (Exception e){
+//            throw new SpeechletException("Kein Speiseplan für " + Utils.getDayAptonym(day) + " gefunden.");
+//        }
+//
+//        System.out.println(speechText);
+//
+//    }
     /**
      * Extracts the queried date from the Alexa intent
      *
@@ -249,7 +250,16 @@ public class MensaBoysSpeechlet implements Speechlet {
             try {
                 date = dateFormat.parse(daySlot.getValue());
 
-                if(date.before(new Date())){
+                Calendar todate = new GregorianCalendar();
+                Calendar slotday = new GregorianCalendar();
+                slotday.setTime(date);
+                // reset hour, minutes, seconds and millis
+                todate.set(Calendar.HOUR_OF_DAY, 0);
+                todate.set(Calendar.MINUTE, 0);
+                todate.set(Calendar.SECOND, 0);
+                todate.set(Calendar.MILLISECOND, 0);
+
+                if(slotday.before(todate)){
                     throw new SpeechletException("Das gewünschte Datum liegt in der Vergangenheit");
                 }
 
