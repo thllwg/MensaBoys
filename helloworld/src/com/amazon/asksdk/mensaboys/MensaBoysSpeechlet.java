@@ -137,7 +137,7 @@ public class MensaBoysSpeechlet implements Speechlet {
 
         String speechText = mensa.getName() + " bietet am " + day.toString() + " folgendes Angebot: ";
 
-        
+
 
 
         // Create the Simple card content.

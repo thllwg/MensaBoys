@@ -1,8 +1,8 @@
 package com.amazon.asksdk.mensaboys;
-import com.amazon.asksdk.mensaboys.*;
 
-import java.util.ArrayList;
+import com.amazon.asksdk.mensaboys.MensaNotFoundException;
 import java.util.Arrays;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,24 +16,23 @@ import java.util.Arrays;
 public class Mensa {
 
     private String name;
-    // private ArrayList<Gericht> gerichte;
     private Speiseplan speiseplan;
 
     /**
      * Constant defining the potential options for the intent slot mensa
      */
     private static final String[] LIST_OF_MENSEN = {
-        "Bistro Denkpause",
-        "Bistro Durchblick",
-        "Bistro Frieden",
-        "Bistro Hüfferstiftung",
-        "Bistro KaBu",
-        "Bistro Katholische Hochschule",
-        "Bistro Oeconomicum",
-        "Mensa Da Vinci",
-        "Mensa Steinfurt",
-        "Mensa am Aasee",
-        "Mensa am Ring"
+            "Bistro Denkpause",
+            "Bistro Durchblick",
+            "Bistro Frieden",
+            "Bistro Hüfferstiftung",
+            "Bistro KaBu",
+            "Bistro Katholische Hochschule",
+            "Bistro Oeconomicum",
+            "Mensa Da Vinci",
+            "Mensa Steinfurt",
+            "Mensa am Aasee",
+            "Mensa am Ring"
     };
 
     public Mensa() {
@@ -59,7 +58,6 @@ public class Mensa {
         this.speiseplan = speiseplan;
     }
 
-
     public String getName() {
         return name;
     }
@@ -76,10 +74,9 @@ public class Mensa {
 
         String[] mensen = getListOfMensen();
 
-        if(Arrays.asList(mensen).contains(name)){
+        if (Arrays.asList(mensen).contains(name)) {
             return new Mensa(name);
-        }
-        else {
+        } else {
             throw new MensaNotFoundException();
         }
     }
