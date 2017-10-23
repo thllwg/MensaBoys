@@ -31,18 +31,15 @@ public class HTTPXMLTest
 		urls.add(ring);
 		urls.add(denkpause);
 		urls.add(durchblick);
-				
 		
 	}
 	
-	public static void main(String[] args) 
-    {
-     HTTPXMLTest mp = new HTTPXMLTest();
-     List<Mensa>mensen = mp.getAllMensen();
-     for(Mensa ms:mensen){
-    	 System.out.println(ms.getName());
-     }
-    }
+//	public static void main(String[] args) 
+//    {
+//     HTTPXMLTest mp = new HTTPXMLTest();
+//     List<Mensa>mensen = mp.getAllMensen();
+//     
+//    }
 	
 	public List<Mensa> getAllMensen(){
 		List<Mensa>mensen = new ArrayList<Mensa>();
@@ -51,7 +48,6 @@ public class HTTPXMLTest
 			try {
 				mensa = this.getMensaPlan(url);
 			} catch (IOException | JDOMException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if (mensa!=null){
@@ -70,14 +66,19 @@ public class HTTPXMLTest
 	        Document document = saxBuilder.build(connection.getInputStream());
 	        Element classElement = document.getRootElement();
 	        Mensa mensa = new Mensa();
-	        mensa.setName(classElement.getAttributeValue("location"));
+	        try{
+	        	 mensa.setName(classElement.getAttributeValue("location"));
+	        } catch (Exception e){
+	        	mensa.setName("Mensa");
+	        }
+	       
 	      //returns a list of all child nodes 
 	       List<Element>speiseplaene =  classElement.getChildren("date");
 	       for(Element eplan:speiseplaene){
 	    	   Speiseplan plan = new Speiseplan();
 	    	  
 	    	   plan.setName("Speiseplan");
-	    //	   plan.setDatum(new Date(eplan.getAttribute("timestamp").getLongValue()));
+	    	   plan.setDatum(new Date(eplan.getAttribute("timestamp").getLongValue()));
 	    	   List<Element>ngerichte = eplan.getChildren("item"); //items
 	    	   for(Element egericht:ngerichte){
 	    		   Gericht gericht = new Gericht();
@@ -117,7 +118,7 @@ public class HTTPXMLTest
 
 	    		   plan.getGerichte().add(gericht);
 	    	   }
-	    	   //mensa.getSpeiseplan().add(plan);
+	    	   mensa.getSpeiseplaene().add(plan);
 	       }
 	      return mensa;
 	}

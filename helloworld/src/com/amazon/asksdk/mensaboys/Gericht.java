@@ -23,7 +23,7 @@ public class Gericht {
     public void setId(String id){
         this.id=id;
     }
-    public String getName(){ return tostring(name); }
+    public String getName(){ return name; }
     public void setName(String name){
         this.name=name;
     }
@@ -56,13 +56,13 @@ public class Gericht {
         this.kategorie=kategorie;
     }
 
-    public string tostring(String name){
+    public String tostring(String name){
 
-        while(name.indexOf("(")!=NULL && name.indexOf(")")){
+        while((name.indexOf("(")!=-1) && name.indexOf(")")!=-1){
             int startzeichen = name.indexOf("(");
             int endzeichen = name.indexOf(")");
             int length = name.length();
-            name = name.substring(0, start)+name.substring(endzeichen, length);
+            name = name.substring(0, startzeichen)+name.substring(endzeichen, length);
         }
 
         return name;
