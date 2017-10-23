@@ -37,28 +37,11 @@ public class MensaBoysSpeechlet implements Speechlet {
      */
     private static final String SLOT_DAY = "tag";
 
-
     /**
      * Constant defining session attribute key for the intent slot key for the date of menu.
      */
     private static final String SLOT_MENSA = "mensa";
 
-    /**
-     * Constant defining the potential options for the intent slot mensa
-     */
-    private static final String[] LIST_OF_MENSEN = {
-            "Bistro Denkpause",
-            "Bistro Durchblick",
-            "Bistro Frieden",
-            "Bistro Hüfferstiftung",
-            "Bistro KaBu",
-            "Bistro Katholische Hochschule",
-            "Bistro Oeconomicum",
-            "Mensa Da Vinci",
-            "Mensa Steinfurt",
-            "Mensa am Aasee",
-            "Mensa am Ring"
-    };
 
     @Override
     public void onSessionStarted(final SessionStartedRequest request, final Session session)

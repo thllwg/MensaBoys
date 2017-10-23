@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+package com.amazon.asksdk.mensaboys;
+
 /**
  *
  * @author tacke
