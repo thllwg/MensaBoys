@@ -66,6 +66,10 @@ public class Mensa {
         throw new SpeiseplanException("Mensa ist geschlossen!");
     }
 
+    public ArrayList<Speiseplan> getSpeiseplaene() {
+        return speiseplan;
+    }
+
     public void setSpeiseplan(Speiseplan speiseplan) {
         this.speiseplan.add(speiseplan);
     }
