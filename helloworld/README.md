@@ -18,7 +18,7 @@ To run this example skill you need to do two things. The first is to deploy the 
 - Using maven: go to the directory containing pom.xml, and run 'mvn assembly:assembly -DdescriptorId=jar-with-dependencies package'. This will generate a zip file named "helloworld-1.0-jar-with-dependencies.jar" in the target directory. 
 - Using gradle: go to the directory containing build.gradle,  and run 'gradle fatJar'. This will generate a zip file named "helloworld-fat-1.0.jar" in the build/libs directory.
 8. Select Code entry type as "Upload a .ZIP file" and then upload the jar file created in step 7 from the build directory to Lambda.
-9. Set the Handler as com.amazon.asksdk.helloworld.HelloWorldSpeechletRequestStreamHandler (this refers to the Lambda RequestStreamHandler file in the zip).
+9. Set the Handler as com.amazon.asksdk.mensaboys.HelloWorldSpeechletRequestStreamHandler (this refers to the Lambda RequestStreamHandler file in the zip).
 10. Choose an existing role - lambda_basic_execution.
 11. Leave the Advanced settings as the defaults.
 12. Click "Next" and review the settings then click "Create Function".
