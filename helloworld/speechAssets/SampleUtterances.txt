@@ -16,3 +16,5 @@ GetSpeiseplanTag Was kochst du {tag}
 GetSpeiseplanTag Was habt ihr gekocht
 GetSpeiseplanTag Was gibt es zu essen
 GetSpeiseplanTag Was esse ich heute
+AMAZON.HelpIntent Wie funktioniert dieser Skill
+AMAZON.HelpIntent Was kann ich die Mensa Boys fragen
