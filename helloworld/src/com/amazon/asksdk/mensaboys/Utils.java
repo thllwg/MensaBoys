@@ -1,6 +1,7 @@
 package com.amazon.asksdk.mensaboys;
 
 import java.util.Date;
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.text.SimpleDateFormat;
@@ -86,16 +87,17 @@ public class Utils {
 
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
         SimpleDateFormat outputfmt = new SimpleDateFormat("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
         LocalDate today = LocalDate.now();
         LocalDate tomorrow = today.plus(1, ChronoUnit.DAYS);
         LocalDate tomorrowtomorrow = today.plus(2, ChronoUnit.DAYS);
 
-        if (fmt.format(day).equals(fmt.format(today))){
+        if (fmt.format(day).equals(formatter.format(today))){
             return "Heute";
-        } else if(fmt.format(day).equals(fmt.format(tomorrow))){
+        } else if(fmt.format(day).equals(formatter.format(tomorrow))){
             return "Morgen";
-        } else if(fmt.format(day).equals(fmt.format(tomorrowtomorrow))){
+        } else if(fmt.format(day).equals(formatter.format(tomorrowtomorrow))){
             return "Übermorgen";
         } else {
             return outputfmt.format(day);
