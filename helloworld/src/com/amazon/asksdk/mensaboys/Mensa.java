@@ -3,6 +3,8 @@ package com.amazon.asksdk.mensaboys;
 import com.amazon.asksdk.mensaboys.MensaNotFoundException;
 import com.amazon.asksdk.mensaboys.SpeiseplanException;
 import com.amazon.asksdk.mensaboys.Utils;
+
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,8 +60,11 @@ public class Mensa {
      */
 
     public Speiseplan getSpeiseplan(Date datum) throws SpeiseplanException {
+
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+
         for(Speiseplan s:speiseplan){
-            if(s.getDatum().equals(datum)){
+            if(fmt.format(s.getDatum()).equals(fmt.format(datum))){
                 return s;
             }
         } 

@@ -78,7 +78,8 @@ public class HTTPXMLTest
 	    	   Speiseplan plan = new Speiseplan();
 	    	  
 	    	   plan.setName("Speiseplan");
-	    	   plan.setDatum(new Date(eplan.getAttribute("timestamp").getLongValue()));
+	    	   long timestamp = eplan.getAttribute("timestamp").getLongValue();
+	    	   plan.setDatum(new Date((long) timestamp*1000));
 	    	   List<Element>ngerichte = eplan.getChildren("item"); //items
 	    	   for(Element egericht:ngerichte){
 	    		   Gericht gericht = new Gericht();

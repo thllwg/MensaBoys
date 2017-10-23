@@ -202,6 +202,37 @@ public class MensaBoysSpeechlet implements Speechlet {
         return SpeechletResponse.newTellResponse(speech, card);
     }
 
+    public static void main(String[] args) throws Exception
+    {
+        Date day = new Date();
+        Mensa mensa = Mensa.getMensaByName("Mensa da Vinci");
+        String speechText = mensa.getName() + " bietet " + Utils.getDayAptonym(day) + " folgendes Angebot: ";
+
+        HTTPXMLTest xmlparser = new HTTPXMLTest();
+        List<Mensa> mensen = xmlparser.getAllMensen();
+
+        for(Mensa mensar:mensen){
+            if(mensa.getName().equalsIgnoreCase(mensar.getName())){
+                mensa = mensar;
+            }
+        }
+
+        try{
+            Speiseplan speiseplan = mensa.getSpeiseplan(day);
+            StringBuilder sb = new StringBuilder();
+            for(Gericht gericht:speiseplan.getGerichte()){
+                sb.append(gericht.getName()+", ");
+            }
+            speechText = speechText + sb.toString();
+
+        } catch (Exception e){
+            e.printStackTrace();
+            //throw new SpeechletException("Kein Speiseplan für " + Utils.getDayAptonym(day) + " gefunden.");
+        }
+
+        System.out.println(speechText);
+
+    }
     /**
      * Extracts the queried date from the Alexa intent
      *
