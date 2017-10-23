@@ -1,6 +1,5 @@
 package com.amazon.asksdk.mensaboys;
 
-import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,9 +11,8 @@ import java.util.ArrayList;
  * @author tacke
  */
 public class Mensa {
-    private int id;
+    private String id;
     private String name;
-    // private ArrayList<Gericht> gerichte;
     private Speiseplan speiseplan;
 
     /**
@@ -37,15 +35,7 @@ public class Mensa {
     public Mensa() {
 
     }
-
-    /* public ArrayList<Gericht> getGerichte(){
-         return gerichte;
-     }
-     public void setGerichte(ArrayList<Gericht> gerichte){
-         this.gerichte=gerichte;
-     }
-     */
-    public Speiseplan getSpeiseplan() {
+     public Speiseplan getSpeiseplan() {
         return speiseplan;
     }
 
@@ -53,11 +43,11 @@ public class Mensa {
         this.speiseplan = speiseplan;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -65,9 +55,12 @@ public class Mensa {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name){
+                this.name=name;
     }
+    
+        
+    
 
     public static String[] getListOfMensen() {
         return LIST_OF_MENSEN;
