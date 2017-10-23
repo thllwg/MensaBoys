@@ -167,7 +167,7 @@ public class MensaBoysSpeechlet implements Speechlet {
         Date day = getSlotDay(intent);
         Mensa mensa = getSlotMensa(intent);
 
-        String speechText = mensa.getName() + " bietet am " + day.toString() + " folgendes Angebot: ";
+        String speechText = mensa.getName() + " bietet am " + Utils.getDayAptonym(day) + " folgendes Angebot: ";
 
         // Create the Simple card content.
         SimpleCard card = new SimpleCard();
@@ -186,8 +186,9 @@ public class MensaBoysSpeechlet implements Speechlet {
      *
      * @param intent Alexa intent
      * @return Date
+     * @throws SpeechletException if a date in the past was given
      */
-    private Date getSlotDay(Intent intent) {
+    private Date getSlotDay(Intent intent) throws SpeechletException {
         Slot daySlot = intent.getSlot(SLOT_DAY);
         Date date;
 
@@ -195,6 +196,11 @@ public class MensaBoysSpeechlet implements Speechlet {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-d");
             try {
                 date = dateFormat.parse(daySlot.getValue());
+
+                if(date.before(new Date())){
+                    throw new SpeechletException("Das gewünschte Datum liegt in der Vergangenheit");
+                }
+
             } catch (ParseException e) {
                 date = new Date();
             }

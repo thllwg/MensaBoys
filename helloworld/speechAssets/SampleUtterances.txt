@@ -8,6 +8,9 @@ GetSpeiseplanTag Was gibt es in der {mensa} {tag} zu essen
 GetSpeiseplanTag Was gibt es im {mensa} {tag} zu essen
 GetSpeiseplanTag Was gibt {tag} in der Mensa
 GetSpeiseplanTag Was wirst du {tag} kochen
-GetSpeiseplanTag Was hast du gekocht
+GetSpeiseplanTag Was werdet ihr {tag} kochen
+GetSpeiseplanTag Was kocht ihr {tag}
+GetSpeiseplanTag Was kochst du {tag}
+GetSpeiseplanTag Was habt ihr gekocht
 GetSpeiseplanTag Was gibt es zu essen
 GetSpeiseplanTag Was esse ich heute
