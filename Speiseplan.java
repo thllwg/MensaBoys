@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -7,7 +8,7 @@ public class Speiseplan {
 	
 	private String name;
 	
-	private Calendar datum = new GregorianCalendar();
+	private Calendar datum;
 	
 	private ArrayList<Gericht> gerichte;
 	
@@ -33,8 +34,8 @@ public class Speiseplan {
 		return datum;
 	}
 	
-	public void setDatum(Calendar datum){
-		this.datum =datum;
+	public void setDatum(int jahr, int monat, int tag){
+		this.datum = new GregorianCalendar(jahr, monat, tag);
 	}
 	
 	public ArrayList<Gericht> getGerichte(){
